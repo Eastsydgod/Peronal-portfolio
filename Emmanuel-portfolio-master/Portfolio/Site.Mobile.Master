@@ -1,0 +1,191 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Mobile.master.cs" Inherits="Portfolio.Site_Mobile" %>
+<%@ Register Src="~/ViewSwitcher.ascx" TagPrefix="friendlyUrls" TagName="ViewSwitcher" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - My Portfolio</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="~/Content/style.css" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-xxxxxx" crossorigin="anonymous" />
+      <script src="https://kit.fontawesome.com/220fe8c60c.js" crossorigin="anonymous"></script>
+
+ <style>
+* {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: white;
+        background-size: cover;
+        background-attachment: fixed;
+        overflow-x: hidden;
+        font-family: sans-serif;
+    }
+
+    .navbar {
+        background-color: #121212; /* Dark Gray/Black */
+    }
+
+    .navbar-dark .navbar-toggler-icon {
+        background-color: black; /* White */
+    }
+
+    .navbar-toggler {
+        border-color: #FFFFFF; /* White */
+    }
+
+    .navbar-toggler-icon {
+        background-color: gray; /* Set your preferred background color for the hamburger icon */
+    }
+
+    .navbar-nav {
+        position: absolute;
+        right: 15px;
+    }
+
+    .nav-item {
+        margin-top: 10px; /* Adjust the spacing between menu items */
+    }
+
+    .nav-link {
+        color: white !important; /* Black */
+    }
+
+     .nav-link:hover {
+     color: grey !important; /* Black */
+ }
+
+    .navbar-text {
+        display: none; /* Hide the text separators on small screens */
+    }
+
+     @media (max-width: 480px){
+         b, p {
+             font-size: 12px;
+         }
+     }
+
+    /* Additional styles for small screens */
+    @media (max-width: 768px) {
+        .navbar-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            width: 100%;
+            position: static;
+        }
+
+        .navbar-toggler {
+            order: -1; /* Move the hamburger icon to the top */
+            margin-right: 15px; /* Adjust margin to separate the hamburger icon from the text */
+        }
+
+        .navbar-collapse {
+            width: 100%;
+            text-align: right; /* Align the text to the right */
+            color: white; /* Set text color to black */
+        }
+
+        .navbar-nav .nav-item {
+            margin-top: 0; /* Remove top margin for menu items */
+        }
+
+        .navbar-text {
+            display: block; /* Show the text separators on small screens */
+        }
+    }
+</style>
+
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark" >
+            <div class="container">
+                <a class="navbar-brand" runat="server" href="~/">Emmanuel James</a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between" >
+                    <ul class="navbar-nav flex-grow-1" >
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/About">About</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contact</a></li>
+                    
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+<%-- <span style="font-size:30px; cursor:pointer" onclick="openNav()">&#9776; Open</span>
+
+<div id="sidebar" class="sidenav" style="width: 0; position: fixed; z-index: 1; top: 0; left: 0; background-color: #111; overflow-x: hidden; transition: 0.5s; padding-top: 60px;">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="padding: 8px 8px 8px 32px; text-decoration: none; font-size: 25px; color: #818181; display: block; transition: 0.3s;">&times; Close</a>
+    <a href="Default.aspx" style="padding: 8px 8px 8px 32px; text-decoration: none; font-size: 25px; color: #818181; display: block; transition: 0.3s;">Home</a>
+    <a href="CateringManagement.aspx" class="menu-link" style="padding: 8px 8px 8px 32px; text-decoration: none; font-size: 25px; color: #818181; display: block; transition: 0.3s;">Catering-Managent</a>
+    <a href="EmmaEngines.aspx" class="menu-link" style="padding: 8px 8px 8px 32px; text-decoration: none; font-size: 25px; color: #818181; display: block; transition: 0.3s;">Emma-Engines</a>
+     <a href="FixIt.aspx" class="menu-link" style="padding: 8px 8px 8px 32px; text-decoration: none; font-size: 25px; color: #818181; display: block; transition: 0.3s;">FixIt</a>
+</div>
+
+<script type="text/javascript">
+    function openNav() {
+        document.getElementById("sidebar").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("sidebar").style.width = "0";
+    }
+</script>--%>
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+           <footer style="text-align: center; background-color: black; display: block;">
+    <b style="color: gray; text-align: center; display: block;  margin-bottom: 50px; padding-top: 20px;">STAY IN TOUCH</b>
+    <a href="mailto:ejames12@ncstudents.niagaracollege.ca">
+        <span style="display: inline-block; text-align: center; color: #007bff; padding: 4px 12px; margin: 4px; border-radius: 20px; border: 2px solid #007bff; background-color: black; margin-bottom: 50px;">LET'S TALK</span>
+    </a>
+    <p style="color: gray">&copy; <%: DateTime.Now.Year %> - &copy; Emmanuel James</p>
+</footer>
+
+        </div>
+    </form>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+    </asp:PlaceHolder>
+</body>
+</html>
